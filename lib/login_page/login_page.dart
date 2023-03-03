@@ -88,6 +88,10 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: _passVisibility,
                     controller: passController,
                     decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: Colors.black,
+                      ),
                       suffixIcon: IconButton(
                         icon: _passVisibility
                             ? Icon(Icons.visibility_off,
@@ -130,17 +134,26 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                Center(
-                  child: TextButton(
-                      onPressed: () {
-                        Navigation.pushNamed(
-                          Routes.signInPage,
-                        );
-                      },
-                      child: Text(
-                        "Sign in",
-                        style: TextStyle(fontSize: SizeUtils.fSize_16()),
-                      )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("don't have an account ?",
+                        style: TextStyle(color: Colors.grey.shade600)),
+                    Center(
+                      child: TextButton(
+                          onPressed: () {
+                            Navigation.pushNamed(
+                              Routes.signInPage,
+                            );
+                          },
+                          child: Text(
+                            "Sign in",
+                            style: TextStyle(
+                                fontSize: SizeUtils.fSize_16(),
+                                decoration: TextDecoration.underline),
+                          )),
+                    ),
+                  ],
                 )
               ],
             ),

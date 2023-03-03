@@ -1,5 +1,6 @@
 import 'package:demoapps/utils/navigation.dart';
 import 'package:demoapps/utils/routes.dart';
+import 'package:demoapps/utils/sizeutils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,36 +28,32 @@ class _ViewPageState extends State<ViewPage> {
           child: Column(
             children: [
               Expanded(
-                child: ListView(
-                  children: [
-                    ListView.separated(
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: CircleAvatar(
-                            backgroundImage: AssetImage(
-                                "${firstApiController.secondApiModalController.value?.data?.images}"),
-                          ),
-                          title: Text(
-                              "${firstApiController.secondApiModalController.value?.data?.title}"),
-                          subtitle: Text(
-                              "${firstApiController.firstApiModalController.value?.data?.first.synopsis}"),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return Divider(
-                          thickness: 2,
-                          color: Colors.black,
-                        );
-                      },
-                      // itemCount: 6,
-                      itemCount: firstApiController.secondApiModalController
-                              .value?.data?.title?.length ??
-                          0,
-                    ),
-                  ],
+                child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: CircleAvatar(radius: SizeUtils.horizontalBlockSize*8,
+                        backgroundImage: NetworkImage(
+                            "${firstApiController.secondApiModalController.value?.data?.images?.jpg?.imageUrl}"),
+                      ),
+                      title: Text(
+                          "${firstApiController.secondApiModalController.value?.data?.title}"),
+                      subtitle: Text(
+                          "${firstApiController.firstApiModalController.value?.data?.first.synopsis}"),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Divider(
+                      thickness: 2,
+                      color: Colors.black,
+                    );
+                  },
+                  // itemCount: 6,
+                  itemCount: firstApiController.secondApiModalController
+                          .value?.data?.title?.length ??
+                      0,
                 ),
               ),
-              Image.asset("asset/image/a.jpeg", height: 100, width: 200),
+
               SizedBox(
                 height: 20,
               ),
@@ -64,7 +61,7 @@ class _ViewPageState extends State<ViewPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigation.pushNamed(
-                      Routes.firstApi,
+                      Routes.webViewPage,
                     );
                   },
                   child: Text("View more"),

@@ -24,7 +24,7 @@ class _SigninPageState extends State<SigninPage> {
         child: Scaffold(
       appBar: AppBar(
         title:
-            Text("Sign In", style: TextStyle(fontSize: SizeUtils.fSize_18())),
+            Text("Register", style: TextStyle(fontSize: SizeUtils.fSize_18())),
         centerTitle: true,
       ),
       body: Padding(
@@ -33,6 +33,7 @@ class _SigninPageState extends State<SigninPage> {
             vertical: SizeUtils.verticalBlockSize * 3),
         child: Column(
           children: [
+            Text("Register"),
             Padding(
               padding: EdgeInsets.only(top: SizeUtils.verticalBlockSize * 6),
               child: TextFormField(
@@ -58,6 +59,10 @@ class _SigninPageState extends State<SigninPage> {
                 obscureText: _passVisibility,
                 controller: emailController,
                 decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: Colors.black,
+                  ),
                   suffixIcon: IconButton(
                     icon: _passVisibility
                         ? Icon(Icons.visibility_off,
@@ -85,12 +90,17 @@ class _SigninPageState extends State<SigninPage> {
                 top: SizeUtils.verticalBlockSize * 2,
               ),
               child: TextFormField(
+
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(10)
                 ], // Only numbers
                 controller: moController,
                 decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.phone,
+                    color: Colors.black,
+                  ),
                   hintText: "Enter Mobile No",
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -114,7 +124,7 @@ class _SigninPageState extends State<SigninPage> {
                     Routes.firstApi,
                   );
                 },
-                child: Text("submit"),
+                child: Text("Register"),
               ),
             ),
           ],
