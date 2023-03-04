@@ -18,37 +18,43 @@ class _FirstApiState extends State<FirstApi> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(children: [
-          Expanded(
-              child: InkWell(
-            onTap: () {
-              Navigation.pushNamed(
-                Routes.viewPage,
-              );
-            },
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(),
-                  title: Text("GTS"),
-                  // Text("${firstApiController.firstApiModalController.value?.data?[index].title}"),
-                  subtitle: Text(
-                      "This site uses cookies from Google to deliver and enhance the quality of its services and to analyze traffic."), // Text("${firstApiController.firstApiModalController.value?.data?[index].synopsis}"),
+        body: Obx(
+          () => Column(children: [
+            Expanded(
+                child: InkWell(
+              onTap: () {
+                Navigation.pushNamed(
+                  Routes.viewPage,
                 );
               },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider(
-                  thickness: 2,
-                  color: Colors.black,
-                );
-              },
-              itemCount: 6,
-              // itemCount: firstApiController
-              //         .firstApiModalController.value?.data?.length ??
-              //     0,
-            ),
-          )),
-        ]),
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(
+                          "${firstApiController.firstApiModalController.value?.data?.first.images?.jpg?.imageUrl}"),
+                    ),
+                    title: Text(
+                        "${firstApiController.firstApiModalController.value?.data?.first.title}"),
+                    subtitle: Text(
+                        "${firstApiController.firstApiModalController.value?.data?.first.synopsis}"),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider(
+                    thickness: 2,
+                    color: Colors.black,
+                  );
+                },
+                // itemCount: 6,
+                itemCount: firstApiController
+                        .firstApiModalController.value?.data?.length ??
+                    0,
+              ),
+            )),
+          ]),
+        ),
       ),
     );
   }

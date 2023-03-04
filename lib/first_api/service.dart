@@ -11,7 +11,7 @@ class FirstApiService {
     return FirstApiModal.fromJson(json.decode(response.body));
   }
 
-  static Future<SecondApiModal> SecondServiceMethod() async {
+  static Future<SecondApiModal?> SecondServiceMethod() async {
     const url = "https://api.jikan.moe/v4/anime/5/full";
     final response = await http.get(Uri.parse(url));
     return SecondApiModal.fromJson(json.decode(response.body));
