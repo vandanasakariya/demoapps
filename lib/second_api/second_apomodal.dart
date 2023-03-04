@@ -1,80 +1,28 @@
-// To parse this JSON data, do
-//
-//     final secondApiModal = secondApiModalFromMap(jsonString);
-
-import 'dart:convert';
-
-SecondApiModal secondApiModalFromMap(String str) =>
-    SecondApiModal.fromMap(json.decode(str));
-
-String secondApiModalToMap(SecondApiModal data) => json.encode(data.toMap());
-
-class SecondApiModal {
-  SecondApiModal({
-    this.data,
-  });
-
+class SeconScreenApi {
   Data? data;
 
-  factory SecondApiModal.fromMap(Map<String, dynamic> json) => SecondApiModal(
-        data: Data.fromMap(json["data"]),
-      );
+  SeconScreenApi({this.data});
 
-  Map<String, dynamic> toMap() => {
-        "data": data!.toMap(),
-      };
+  SeconScreenApi.fromJson(Map<String, dynamic> json) {
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.data != null) {
+      data['data'] = this.data!.toJson();
+    }
+    return data;
+  }
 }
 
 class Data {
-  Data({
-    this.malId,
-    this.url,
-    this.images,
-    this.trailer,
-    this.approved,
-    this.titles,
-    this.title,
-    this.titleEnglish,
-    this.titleJapanese,
-    this.titleSynonyms,
-    this.type,
-    this.source,
-    this.episodes,
-    this.status,
-    this.airing,
-    this.aired,
-    this.duration,
-    this.rating,
-    this.score,
-    this.scoredBy,
-    this.rank,
-    this.popularity,
-    this.members,
-    this.favorites,
-    this.synopsis,
-    this.background,
-    this.season,
-    this.year,
-    this.broadcast,
-    this.producers,
-    this.licensors,
-    this.studios,
-    this.genres,
-    this.explicitGenres,
-    this.themes,
-    this.demographics,
-    this.relations,
-    this.theme,
-    this.dataExternal,
-    this.streaming,
-  });
-
   int? malId;
   String? url;
-  Map<String, Image>? images;
+  Images? images;
   Trailer? trailer;
   bool? approved;
-  List<Title>? titles;
+  List<Titles>? titles;
   String? title;
   String? titleEnglish;
   String? titleJapanese;
@@ -94,404 +42,705 @@ class Data {
   int? members;
   int? favorites;
   String? synopsis;
-  dynamic background;
-  dynamic season;
-  dynamic year;
+  Null? background;
+  Null? season;
+  Null? year;
   Broadcast? broadcast;
-  List<Genre>? producers;
-  List<Genre>? licensors;
-  List<Genre>? studios;
-  List<Genre>? genres;
+  List<Producers>? producers;
+  List<Licensors>? licensors;
+  List<Studios>? studios;
+  List<Genres>? genres;
   List<dynamic>? explicitGenres;
-  List<Genre>? themes;
+  List<Themes>? themes;
   List<dynamic>? demographics;
-  List<Relation>? relations;
+  List<Relations>? relations;
   Theme? theme;
-  List<dynamic>? dataExternal;
+  List<dynamic>? external;
   List<Streaming>? streaming;
 
-  factory Data.fromMap(Map<String, dynamic> json) => Data(
-        malId: json["mal_id"],
-        url: json["url"],
-        images: Map.from(json["images"])
-            .map((k, v) => MapEntry<String, Image>(k, Image.fromMap(v))),
-        trailer: Trailer.fromMap(json["trailer"]),
-        approved: json["approved"],
-        titles: List<Title>.from(json["titles"].map((x) => Title.fromMap(x))),
-        title: json["title"],
-        titleEnglish: json["title_english"],
-        titleJapanese: json["title_japanese"],
-        titleSynonyms: List<String>.from(json["title_synonyms"].map((x) => x)),
-        type: json["type"],
-        source: json["source"],
-        episodes: json["episodes"],
-        status: json["status"],
-        airing: json["airing"],
-        aired: Aired.fromMap(json["aired"]),
-        duration: json["duration"],
-        rating: json["rating"],
-        score: json["score"]?.toDouble(),
-        scoredBy: json["scored_by"],
-        rank: json["rank"],
-        popularity: json["popularity"],
-        members: json["members"],
-        favorites: json["favorites"],
-        synopsis: json["synopsis"],
-        background: json["background"],
-        season: json["season"],
-        year: json["year"],
-        broadcast: Broadcast.fromMap(json["broadcast"]),
-        producers:
-            List<Genre>.from(json["producers"].map((x) => Genre.fromMap(x))),
-        licensors:
-            List<Genre>.from(json["licensors"].map((x) => Genre.fromMap(x))),
-        studios: List<Genre>.from(json["studios"].map((x) => Genre.fromMap(x))),
-        genres: List<Genre>.from(json["genres"].map((x) => Genre.fromMap(x))),
-        explicitGenres:
-            List<dynamic>.from(json["explicit_genres"].map((x) => x)),
-        themes: List<Genre>.from(json["themes"].map((x) => Genre.fromMap(x))),
-        demographics: List<dynamic>.from(json["demographics"].map((x) => x)),
-        relations: List<Relation>.from(
-            json["relations"].map((x) => Relation.fromMap(x))),
-        theme: Theme.fromMap(json["theme"]),
-        dataExternal: List<dynamic>.from(json["external"].map((x) => x)),
-        streaming: List<Streaming>.from(
-            json["streaming"].map((x) => Streaming.fromMap(x))),
-      );
+  Data(
+      {this.malId,
+      this.url,
+      this.images,
+      this.trailer,
+      this.approved,
+      this.titles,
+      this.title,
+      this.titleEnglish,
+      this.titleJapanese,
+      this.titleSynonyms,
+      this.type,
+      this.source,
+      this.episodes,
+      this.status,
+      this.airing,
+      this.aired,
+      this.duration,
+      this.rating,
+      this.score,
+      this.scoredBy,
+      this.rank,
+      this.popularity,
+      this.members,
+      this.favorites,
+      this.synopsis,
+      this.background,
+      this.season,
+      this.year,
+      this.broadcast,
+      this.producers,
+      this.licensors,
+      this.studios,
+      this.genres,
+      this.explicitGenres,
+      this.themes,
+      this.demographics,
+      this.relations,
+      this.theme,
+      this.external,
+      this.streaming});
 
-  Map<String, dynamic> toMap() => {
-        "mal_id": malId,
-        "url": url,
-        "images": Map.from(images!)
-            .map((k, v) => MapEntry<String, dynamic>(k, v.toMap())),
-        "trailer": trailer!.toMap(),
-        "approved": approved,
-        "titles": List<dynamic>.from(titles!.map((x) => x.toMap())),
-        "title": title,
-        "title_english": titleEnglish,
-        "title_japanese": titleJapanese,
-        "title_synonyms": List<dynamic>.from(titleSynonyms!.map((x) => x)),
-        "type": type,
-        "source": source,
-        "episodes": episodes,
-        "status": status,
-        "airing": airing,
-        "aired": aired!.toMap(),
-        "duration": duration,
-        "rating": rating,
-        "score": score,
-        "scored_by": scoredBy,
-        "rank": rank,
-        "popularity": popularity,
-        "members": members,
-        "favorites": favorites,
-        "synopsis": synopsis,
-        "background": background,
-        "season": season,
-        "year": year,
-        "broadcast": broadcast!.toMap(),
-        "producers": List<dynamic>.from(producers!.map((x) => x.toMap())),
-        "licensors": List<dynamic>.from(licensors!.map((x) => x.toMap())),
-        "studios": List<dynamic>.from(studios!.map((x) => x.toMap())),
-        "genres": List<dynamic>.from(genres!.map((x) => x.toMap())),
-        "explicit_genres": List<dynamic>.from(explicitGenres!.map((x) => x)),
-        "themes": List<dynamic>.from(themes!.map((x) => x.toMap())),
-        "demographics": List<dynamic>.from(demographics!.map((x) => x)),
-        "relations": List<dynamic>.from(relations!.map((x) => x.toMap())),
-        "theme": theme!.toMap(),
-        "external": List<dynamic>.from(dataExternal!.map((x) => x)),
-        "streaming": List<dynamic>.from(streaming!.map((x) => x.toMap())),
-      };
+  Data.fromJson(Map<String, dynamic> json) {
+    malId = json['mal_id'];
+    url = json['url'];
+    images =
+        json['images'] != null ? new Images.fromJson(json['images']) : null;
+    trailer =
+        json['trailer'] != null ? new Trailer.fromJson(json['trailer']) : null;
+    approved = json['approved'];
+    if (json['titles'] != null) {
+      titles = <Titles>[];
+      json['titles'].forEach((v) {
+        titles!.add(new Titles.fromJson(v));
+      });
+    }
+    title = json['title'];
+    titleEnglish = json['title_english'];
+    titleJapanese = json['title_japanese'];
+    titleSynonyms = json['title_synonyms'].cast<String>();
+    type = json['type'];
+    source = json['source'];
+    episodes = json['episodes'];
+    status = json['status'];
+    airing = json['airing'];
+    aired = json['aired'] != null ? new Aired.fromJson(json['aired']) : null;
+    duration = json['duration'];
+    rating = json['rating'];
+    score = json['score'];
+    scoredBy = json['scored_by'];
+    rank = json['rank'];
+    popularity = json['popularity'];
+    members = json['members'];
+    favorites = json['favorites'];
+    synopsis = json['synopsis'];
+    background = json['background'];
+    season = json['season'];
+    year = json['year'];
+    broadcast = json['broadcast'] != null
+        ? new Broadcast.fromJson(json['broadcast'])
+        : null;
+    if (json['producers'] != null) {
+      producers = <Producers>[];
+      json['producers'].forEach((v) {
+        producers!.add(new Producers.fromJson(v));
+      });
+    }
+    if (json['licensors'] != null) {
+      licensors = <Licensors>[];
+      json['licensors'].forEach((v) {
+        licensors!.add(new Licensors.fromJson(v));
+      });
+    }
+    if (json['studios'] != null) {
+      studios = <Studios>[];
+      json['studios'].forEach((v) {
+        studios!.add(new Studios.fromJson(v));
+      });
+    }
+    if (json['genres'] != null) {
+      genres = <Genres>[];
+      json['genres'].forEach((v) {
+        genres!.add(new Genres.fromJson(v));
+      });
+    }
+    // if (json['explicit_genres'] != null) {
+    //   explicitGenres = <dynamic>[];
+    //   json['explicit_genres'].forEach((v) {
+    //     explicitGenres!.add(dynamic.fromJson(v));
+    //   });
+    // }
+    explicitGenres = List<dynamic>.from(json["explicit_genres"].map((x) => x));
+
+    if (json['themes'] != null) {
+      themes = <Themes>[];
+      json['themes'].forEach((v) {
+        themes!.add(new Themes.fromJson(v));
+      });
+    }
+    // if (json['demographics'] != null) {
+    //   demographics = <Null>[];
+    //   json['demographics'].forEach((v) {
+    //     demographics!.add(new Null.fromJson(v));
+    //   });
+    // }
+    demographics = List<dynamic>.from(json["demographics"].map((x) => x));
+
+    if (json['relations'] != null) {
+      relations = <Relations>[];
+      json['relations'].forEach((v) {
+        relations!.add(Relations.fromJson(v));
+      });
+    }
+    theme = json['theme'] != null ? new Theme.fromJson(json['theme']) : null;
+    // if (json['external'] != null) {
+    //   external = <Null>[];
+    //   json['external'].forEach((v) {
+    //     external!.add(new Null.fromJson(v));
+    //   });
+    // }
+    external = List<dynamic>.from(json["external"].map((x) => x));
+
+    if (json['streaming'] != null) {
+      streaming = <Streaming>[];
+      json['streaming'].forEach((v) {
+        streaming!.add(new Streaming.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['mal_id'] = this.malId;
+    data['url'] = this.url;
+    if (this.images != null) {
+      data['images'] = this.images!.toJson();
+    }
+    if (this.trailer != null) {
+      data['trailer'] = this.trailer!.toJson();
+    }
+    data['approved'] = this.approved;
+    if (this.titles != null) {
+      data['titles'] = this.titles!.map((v) => v.toJson()).toList();
+    }
+    data['title'] = this.title;
+    data['title_english'] = this.titleEnglish;
+    data['title_japanese'] = this.titleJapanese;
+    data['title_synonyms'] = this.titleSynonyms;
+    data['type'] = this.type;
+    data['source'] = this.source;
+    data['episodes'] = this.episodes;
+    data['status'] = this.status;
+    data['airing'] = this.airing;
+    if (this.aired != null) {
+      data['aired'] = this.aired!.toJson();
+    }
+    data['duration'] = this.duration;
+    data['rating'] = this.rating;
+    data['score'] = this.score;
+    data['scored_by'] = this.scoredBy;
+    data['rank'] = this.rank;
+    data['popularity'] = this.popularity;
+    data['members'] = this.members;
+    data['favorites'] = this.favorites;
+    data['synopsis'] = this.synopsis;
+    data['background'] = this.background;
+    data['season'] = this.season;
+    data['year'] = this.year;
+    if (this.broadcast != null) {
+      data['broadcast'] = this.broadcast!.toJson();
+    }
+    if (this.producers != null) {
+      data['producers'] = this.producers!.map((v) => v.toJson()).toList();
+    }
+    if (this.licensors != null) {
+      data['licensors'] = this.licensors!.map((v) => v.toJson()).toList();
+    }
+    if (this.studios != null) {
+      data['studios'] = this.studios!.map((v) => v.toJson()).toList();
+    }
+    if (this.genres != null) {
+      data['genres'] = this.genres!.map((v) => v.toJson()).toList();
+    }
+    if (this.explicitGenres != null) {
+      data['explicit_genres'] =
+          this.explicitGenres!.map((v) => v.toJson()).toList();
+    }
+    if (this.themes != null) {
+      data['themes'] = this.themes!.map((v) => v.toJson()).toList();
+    }
+    if (this.demographics != null) {
+      data['demographics'] = this.demographics!.map((v) => v.toJson()).toList();
+    }
+    if (this.relations != null) {
+      data['relations'] = this.relations!.map((v) => v.toJson()).toList();
+    }
+    if (this.theme != null) {
+      data['theme'] = this.theme!.toJson();
+    }
+    if (this.external != null) {
+      data['external'] = this.external!.map((v) => v.toJson()).toList();
+    }
+    if (this.streaming != null) {
+      data['streaming'] = this.streaming!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-class Aired {
-  Aired({
-    this.from,
-    this.to,
-    this.prop,
-    this.string,
-  });
+class Images {
+  Jpg? jpg;
+  Jpg? webp;
 
-  DateTime? from;
-  dynamic to;
-  Prop? prop;
-  String? string;
+  Images({this.jpg, this.webp});
 
-  factory Aired.fromMap(Map<String, dynamic> json) => Aired(
-        from: DateTime.parse(json["from"]),
-        to: json["to"],
-        prop: Prop.fromMap(json["prop"]),
-        string: json["string"],
-      );
+  Images.fromJson(Map<String, dynamic> json) {
+    jpg = json['jpg'] != null ? new Jpg.fromJson(json['jpg']) : null;
+    webp = json['webp'] != null ? new Jpg.fromJson(json['webp']) : null;
+  }
 
-  Map<String, dynamic> toMap() => {
-        "from": from!.toIso8601String(),
-        "to": to,
-        "prop": prop!.toMap(),
-        "string": string,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.jpg != null) {
+      data['jpg'] = this.jpg!.toJson();
+    }
+    if (this.webp != null) {
+      data['webp'] = this.webp!.toJson();
+    }
+    return data;
+  }
 }
 
-class Prop {
-  Prop({
-    this.from,
-    this.to,
-  });
-
-  From? from;
-  From? to;
-
-  factory Prop.fromMap(Map<String, dynamic> json) => Prop(
-        from: From.fromMap(json["from"]),
-        to: From.fromMap(json["to"]),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "from": from!.toMap(),
-        "to": to!.toMap(),
-      };
-}
-
-class From {
-  From({
-    this.day,
-    this.month,
-    this.year,
-  });
-
-  int? day;
-  int? month;
-  int? year;
-
-  factory From.fromMap(Map<String, dynamic> json) => From(
-        day: json["day"],
-        month: json["month"],
-        year: json["year"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "day": day,
-        "month": month,
-        "year": year,
-      };
-}
-
-class Broadcast {
-  Broadcast({
-    this.day,
-    this.time,
-    this.timezone,
-    this.string,
-  });
-
-  dynamic day;
-  dynamic time;
-  dynamic timezone;
-  dynamic string;
-
-  factory Broadcast.fromMap(Map<String, dynamic> json) => Broadcast(
-        day: json["day"],
-        time: json["time"],
-        timezone: json["timezone"],
-        string: json["string"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "day": day,
-        "time": time,
-        "timezone": timezone,
-        "string": string,
-      };
-}
-
-class Genre {
-  Genre({
-    this.malId,
-    this.type,
-    this.name,
-    this.url,
-  });
-
-  int? malId;
-  String? type;
-  String? name;
-  String? url;
-
-  factory Genre.fromMap(Map<String, dynamic> json) => Genre(
-        malId: json["mal_id"],
-        type: json["type"],
-        name: json["name"],
-        url: json["url"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "mal_id": malId,
-        "type": type,
-        "name": name,
-        "url": url,
-      };
-}
-
-class Image {
-  Image({
-    this.imageUrl,
-    this.smallImageUrl,
-    this.largeImageUrl,
-  });
-
+class Jpg {
   String? imageUrl;
   String? smallImageUrl;
   String? largeImageUrl;
 
-  factory Image.fromMap(Map<String, dynamic> json) => Image(
-        imageUrl: json["image_url"],
-        smallImageUrl: json["small_image_url"],
-        largeImageUrl: json["large_image_url"],
-      );
+  Jpg({this.imageUrl, this.smallImageUrl, this.largeImageUrl});
 
-  Map<String, dynamic> toMap() => {
-        "image_url": imageUrl,
-        "small_image_url": smallImageUrl,
-        "large_image_url": largeImageUrl,
-      };
-}
+  Jpg.fromJson(Map<String, dynamic> json) {
+    imageUrl = json['image_url'];
+    smallImageUrl = json['small_image_url'];
+    largeImageUrl = json['large_image_url'];
+  }
 
-class Relation {
-  Relation({
-    this.relation,
-    this.entry,
-  });
-
-  String? relation;
-  List<Genre>? entry;
-
-  factory Relation.fromMap(Map<String, dynamic> json) => Relation(
-        relation: json["relation"],
-        entry: List<Genre>.from(json["entry"].map((x) => Genre.fromMap(x))),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "relation": relation,
-        "entry": List<dynamic>.from(entry!.map((x) => x.toMap())),
-      };
-}
-
-class Streaming {
-  Streaming({
-    this.name,
-    this.url,
-  });
-
-  String? name;
-  String? url;
-
-  factory Streaming.fromMap(Map<String, dynamic> json) => Streaming(
-        name: json["name"],
-        url: json["url"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "name": name,
-        "url": url,
-      };
-}
-
-class Theme {
-  Theme({
-    this.openings,
-    this.endings,
-  });
-
-  List<String>? openings;
-  List<String>? endings;
-
-  factory Theme.fromMap(Map<String, dynamic> json) => Theme(
-        openings: List<String>.from(json["openings"].map((x) => x)),
-        endings: List<String>.from(json["endings"].map((x) => x)),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "openings": List<dynamic>.from(openings!.map((x) => x)),
-        "endings": List<dynamic>.from(endings!.map((x) => x)),
-      };
-}
-
-class Title {
-  Title({
-    this.type,
-    this.title,
-  });
-
-  String? type;
-  String? title;
-
-  factory Title.fromMap(Map<String, dynamic> json) => Title(
-        type: json["type"],
-        title: json["title"],
-      );
-
-  Map<String, dynamic> toMap() => {
-        "type": type,
-        "title": title,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['image_url'] = this.imageUrl;
+    data['small_image_url'] = this.smallImageUrl;
+    data['large_image_url'] = this.largeImageUrl;
+    return data;
+  }
 }
 
 class Trailer {
-  Trailer({
-    this.youtubeId,
-    this.url,
-    this.embedUrl,
-    this.images,
-  });
-
   String? youtubeId;
   String? url;
   String? embedUrl;
-  Images? images;
+  Image? image;
 
-  factory Trailer.fromMap(Map<String, dynamic> json) => Trailer(
-        youtubeId: json["youtube_id"],
-        url: json["url"],
-        embedUrl: json["embed_url"],
-        images: Images.fromMap(json["images"]),
-      );
+  Trailer({this.youtubeId, this.url, this.embedUrl, this.image});
 
-  Map<String, dynamic> toMap() => {
-        "youtube_id": youtubeId,
-        "url": url,
-        "embed_url": embedUrl,
-        "images": images!.toMap(),
-      };
+  Trailer.fromJson(Map<String, dynamic> json) {
+    youtubeId = json['youtube_id'];
+    url = json['url'];
+    embedUrl = json['embed_url'];
+    image = json['image'] != null ? new Image.fromJson(json['image']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['youtube_id'] = this.youtubeId;
+    data['url'] = this.url;
+    data['embed_url'] = this.embedUrl;
+    if (this.image != null) {
+      data['image'] = this.image!.toJson();
+    }
+    return data;
+  }
 }
 
-class Images {
-  Images({
-    this.imageUrl,
-    this.smallImageUrl,
-    this.mediumImageUrl,
-    this.largeImageUrl,
-    this.maximumImageUrl,
-  });
-
+class Image {
   String? imageUrl;
   String? smallImageUrl;
   String? mediumImageUrl;
   String? largeImageUrl;
   String? maximumImageUrl;
 
-  factory Images.fromMap(Map<String, dynamic> json) => Images(
-        imageUrl: json["image_url"],
-        smallImageUrl: json["small_image_url"],
-        mediumImageUrl: json["medium_image_url"],
-        largeImageUrl: json["large_image_url"],
-        maximumImageUrl: json["maximum_image_url"],
-      );
+  Image(
+      {this.imageUrl,
+      this.smallImageUrl,
+      this.mediumImageUrl,
+      this.largeImageUrl,
+      this.maximumImageUrl});
 
-  Map<String, dynamic> toMap() => {
-        "image_url": imageUrl,
-        "small_image_url": smallImageUrl,
-        "medium_image_url": mediumImageUrl,
-        "large_image_url": largeImageUrl,
-        "maximum_image_url": maximumImageUrl,
-      };
+  Image.fromJson(Map<String, dynamic> json) {
+    imageUrl = json['image_url'];
+    smallImageUrl = json['small_image_url'];
+    mediumImageUrl = json['medium_image_url'];
+    largeImageUrl = json['large_image_url'];
+    maximumImageUrl = json['maximum_image_url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['image_url'] = this.imageUrl;
+    data['small_image_url'] = this.smallImageUrl;
+    data['medium_image_url'] = this.mediumImageUrl;
+    data['large_image_url'] = this.largeImageUrl;
+    data['maximum_image_url'] = this.maximumImageUrl;
+    return data;
+  }
+}
+
+class Titles {
+  String? type;
+  String? title;
+
+  Titles({this.type, this.title});
+
+  Titles.fromJson(Map<String, dynamic> json) {
+    type = json['type'];
+    title = json['title'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = this.type;
+    data['title'] = this.title;
+    return data;
+  }
+}
+
+class Aired {
+  String? from;
+  Null? to;
+  Prop? prop;
+  String? string;
+
+  Aired({this.from, this.to, this.prop, this.string});
+
+  Aired.fromJson(Map<String, dynamic> json) {
+    from = json['from'];
+    to = json['to'];
+    prop = json['prop'] != null ? new Prop.fromJson(json['prop']) : null;
+    string = json['string'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['from'] = this.from;
+    data['to'] = this.to;
+    if (this.prop != null) {
+      data['prop'] = this.prop!.toJson();
+    }
+    data['string'] = this.string;
+    return data;
+  }
+}
+
+class Prop {
+  From? from;
+  To? to;
+
+  Prop({this.from, this.to});
+
+  Prop.fromJson(Map<String, dynamic> json) {
+    from = json['from'] != null ? new From.fromJson(json['from']) : null;
+    to = json['to'] != null ? new To.fromJson(json['to']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.from != null) {
+      data['from'] = this.from!.toJson();
+    }
+    if (this.to != null) {
+      data['to'] = this.to!.toJson();
+    }
+    return data;
+  }
+}
+
+class From {
+  int? day;
+  int? month;
+  int? year;
+
+  From({this.day, this.month, this.year});
+
+  From.fromJson(Map<String, dynamic> json) {
+    day = json['day'];
+    month = json['month'];
+    year = json['year'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['day'] = this.day;
+    data['month'] = this.month;
+    data['year'] = this.year;
+    return data;
+  }
+}
+
+class To {
+  Null? day;
+  Null? month;
+  Null? year;
+
+  To({this.day, this.month, this.year});
+
+  To.fromJson(Map<String, dynamic> json) {
+    day = json['day'];
+    month = json['month'];
+    year = json['year'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['day'] = this.day;
+    data['month'] = this.month;
+    data['year'] = this.year;
+    return data;
+  }
+}
+
+class Broadcast {
+  Null? day;
+  Null? time;
+  Null? timezone;
+  Null? string;
+
+  Broadcast({this.day, this.time, this.timezone, this.string});
+
+  Broadcast.fromJson(Map<String, dynamic> json) {
+    day = json['day'];
+    time = json['time'];
+    timezone = json['timezone'];
+    string = json['string'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['day'] = this.day;
+    data['time'] = this.time;
+    data['timezone'] = this.timezone;
+    data['string'] = this.string;
+    return data;
+  }
+}
+
+class Producers {
+  int? malId;
+  String? type;
+  String? name;
+  String? url;
+
+  Producers({this.malId, this.type, this.name, this.url});
+
+  Producers.fromJson(Map<String, dynamic> json) {
+    malId = json['mal_id'];
+    type = json['type'];
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['mal_id'] = this.malId;
+    data['type'] = this.type;
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class Relations {
+  String? relation;
+  List<Entry>? entry;
+
+  Relations({this.relation, this.entry});
+
+  Relations.fromJson(Map<String, dynamic> json) {
+    relation = json['relation'];
+
+    if (json['entry'] != null) {
+      entry = <Entry>[];
+      json['entry'].forEach((v) {
+        entry!.add(Entry.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['relation'] = this.relation;
+    if (this.entry != null) {
+      data['entry'] = this.entry!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Theme {
+  List<String>? openings;
+  List<String>? endings;
+
+  Theme({this.openings, this.endings});
+
+  Theme.fromJson(Map<String, dynamic> json) {
+    openings = json['openings'].cast<String>();
+    endings = json['endings'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['openings'] = this.openings;
+    data['endings'] = this.endings;
+    return data;
+  }
+}
+
+class Streaming {
+  String? name;
+  String? url;
+
+  Streaming({this.name, this.url});
+
+  Streaming.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class Licensors {
+  int? malId;
+  String? type;
+  String? name;
+  String? url;
+
+  Licensors({this.malId, this.type, this.name, this.url});
+
+  Licensors.fromJson(Map<String, dynamic> json) {
+    malId = json['mal_id'];
+    type = json['type'];
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['mal_id'] = this.malId;
+    data['type'] = this.type;
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class Studios {
+  int? malId;
+  String? type;
+  String? name;
+  String? url;
+
+  Studios({this.malId, this.type, this.name, this.url});
+
+  Studios.fromJson(Map<String, dynamic> json) {
+    malId = json['mal_id'];
+    type = json['type'];
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['mal_id'] = this.malId;
+    data['type'] = this.type;
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class Genres {
+  int? malId;
+  String? type;
+  String? name;
+  String? url;
+
+  Genres({this.malId, this.type, this.name, this.url});
+
+  Genres.fromJson(Map<String, dynamic> json) {
+    malId = json['mal_id'];
+    type = json['type'];
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['mal_id'] = this.malId;
+    data['type'] = this.type;
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class Themes {
+  int? malId;
+  String? type;
+  String? name;
+  String? url;
+
+  Themes({this.malId, this.type, this.name, this.url});
+
+  Themes.fromJson(Map<String, dynamic> json) {
+    malId = json['mal_id'];
+    type = json['type'];
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['mal_id'] = this.malId;
+    data['type'] = this.type;
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class Entry {
+  int? malId;
+  String? type;
+  String? name;
+  String? url;
+
+  Entry({this.malId, this.type, this.name, this.url});
+
+  Entry.fromJson(Map<String, dynamic> json) {
+    malId = json['mal_id'];
+    type = json['type'];
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['mal_id'] = this.malId;
+    data['type'] = this.type;
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
+  }
 }

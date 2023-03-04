@@ -12,7 +12,7 @@ class FirstApiController extends GetxController {
   }
 
   Rx<FirstApiModal?> firstApiModalController = FirstApiModal().obs;
-  Rx<SecondApiModal?> secondApiModalController = SecondApiModal().obs;
+  Rx<SeconScreenApi?> secondApiModalController = SeconScreenApi().obs;
 
   Future<void> getRupeeMethod() async {
     final result = await FirstApiService.FirstApiServiceMethod();
