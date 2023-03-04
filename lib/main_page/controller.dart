@@ -1,7 +1,8 @@
-import 'package:demoapps/first_api/modal.dart';
-import 'package:demoapps/first_api/service.dart';
-import 'package:demoapps/second_api/second_apomodal.dart';
+import 'package:demoapps/main_page/service.dart';
 import 'package:get/get.dart';
+
+import '../more_info/second_apomodal.dart';
+import 'modal.dart';
 
 class FirstApiController extends GetxController {
   @override

@@ -1,10 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../main_page/controller.dart';
+
+class ViewPage extends StatefulWidget {
+  const ViewPage({Key? key}) : super(key: key);
+
+  @override
+  State<ViewPage> createState() => _ViewPageState();
+}
+
+class _ViewPageState extends State<ViewPage> {
+  final FirstApiController firstApiController = Get.find();
+
+  var one = Get.arguments;
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: NetworkImage(
+                  "${firstApiController.firstApiModalController.value?.data?[index].images?.jpg?.imageUrl}"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/*
 import 'package:demoapps/utils/navigation.dart';
 import 'package:demoapps/utils/routes.dart';
 import 'package:demoapps/utils/sizeutils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../first_api/controller.dart';
+import '../main_page/controller.dart';
+
 
 class ViewPage extends StatefulWidget {
   const ViewPage({Key? key}) : super(key: key);
@@ -74,3 +111,4 @@ class _ViewPageState extends State<ViewPage> {
     );
   }
 }
+*/
