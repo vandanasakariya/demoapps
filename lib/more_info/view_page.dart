@@ -1,7 +1,10 @@
+import 'package:demoapps/utils/sizeutils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../main_page/controller.dart';
+import '../utils/navigation.dart';
+import '../utils/routes.dart';
 
 class ViewPage extends StatefulWidget {
   const ViewPage({Key? key}) : super(key: key);
@@ -13,20 +16,70 @@ class ViewPage extends StatefulWidget {
 class _ViewPageState extends State<ViewPage> {
   final FirstApiController firstApiController = Get.find();
 
-  var one = Get.arguments;
+  // final FirstApiController firstApiController = Get.put(FirstApiController());
+
+  var apiCheck;
 
   @override
   Widget build(BuildContext context) {
+    apiCheck = Get.arguments;
+    print("aaaaaaaa${apiCheck["check"]}");
+
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            CircleAvatar(
-              radius: 30,
-              backgroundImage: NetworkImage(
-                  "${firstApiController.firstApiModalController.value?.data?[index].images?.jpg?.imageUrl}"),
+        body: SingleChildScrollView(
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("asset/image/bg.jpeg"),
+                fit: BoxFit.cover,
+              ),
             ),
-          ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: SizeUtils.verticalBlockSize * 2,
+                  vertical: SizeUtils.horizontalBlockSize * 10),
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    radius: SizeUtils.horizontalBlockSize * 20,
+                    backgroundImage: NetworkImage("${apiCheck["image"]}"),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(top: SizeUtils.horizontalBlockSize * 5),
+                    child: Text("${apiCheck["title"]}",
+                        style: TextStyle(
+                            fontSize: SizeUtils.fSize_25(),
+                            fontWeight: FontWeight.bold)),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.only(top: SizeUtils.horizontalBlockSize * 3),
+                    child: Text("${apiCheck["desc"]}",style: TextStyle(
+                        fontSize: SizeUtils.fSize_14(),
+                    )),
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.only(top: SizeUtils.horizontalBlockSize * 10),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Navigation.pushNamed(Routes.webView, arg: {
+                            "url": "${apiCheck["url"]}",
+                          });
+                        },
+                        child: Padding(
+                          padding:  EdgeInsets.all(8),
+                          child: Text(
+                            "Trailer",
+                            style: TextStyle(fontSize: SizeUtils.fSize_15()),
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:demoapps/login_page/login_page.dart';
 import 'package:demoapps/login_page/sign_inpage.dart';
+import 'package:demoapps/web_view/web_view.dart';
 import 'package:get/get.dart';
 
 import '../main_page/first_api.dart';
@@ -12,8 +13,7 @@ mixin Routes {
   static const firstApi = "/FirstApi";
   static const signInPage = "/SigninPage";
   static const viewPage = "/ViewPage";
-  static const webViewPage = "/webViewPage";
-  static const webViewPagee = "/webViewPagee";
+  static const webView = "/WebView";
 
   static List<GetPage<dynamic>> pages = [
     GetPage<dynamic>(
@@ -31,9 +31,15 @@ mixin Routes {
       page: () => SigninPage(),
       transition: defaultTransition,
     ),
+
     GetPage<dynamic>(
       name: viewPage,
       page: () => ViewPage(),
+      transition: defaultTransition,
+    ),
+    GetPage<dynamic>(
+      name: webView,
+      page: () => CommonWebView(),
       transition: defaultTransition,
     ),
 
