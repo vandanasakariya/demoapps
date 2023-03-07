@@ -1,5 +1,6 @@
 import 'package:demoapps/login_page/login_page.dart';
 import 'package:demoapps/login_page/sign_inpage.dart';
+import 'package:demoapps/splash.dart';
 import 'package:demoapps/web_view/web_view.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,7 @@ mixin Routes {
   static const signInPage = "/SigninPage";
   static const viewPage = "/ViewPage";
   static const webView = "/WebView";
+  static const splashScreen = "/SplashScreen";
 
   static List<GetPage<dynamic>> pages = [
     GetPage<dynamic>(
@@ -42,6 +44,10 @@ mixin Routes {
       page: () => CommonWebView(),
       transition: defaultTransition,
     ),
-
+    GetPage<dynamic>(
+      name: splashScreen,
+      page: () => SplashScreen(),
+      transition: defaultTransition,
+    ),
   ];
 }

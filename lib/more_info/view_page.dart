@@ -27,14 +27,15 @@ class _ViewPageState extends State<ViewPage> {
 
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("asset/image/bg.jpeg"),
-                fit: BoxFit.cover,
-              ),
+        body: Container(
+          height: SizeUtils.verticalBlockSize* 95,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("asset/image/bg.jpeg"),
+              fit: BoxFit.cover,
             ),
+          ),
+          child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: SizeUtils.verticalBlockSize * 2,
